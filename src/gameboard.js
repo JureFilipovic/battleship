@@ -4,7 +4,9 @@ export default function GameBoard() {
     const board = Array.from({ length: 10 }, () => Array(10).fill(null));
     const ships = [];
 
-    const getBoard = () => board;
+    const getBoard = () => board.map(row => [...row]);
+
+    const getShips = () => ships;
 
     const placeShip = (row, column, ship, direction) => {
         const length = ship.getLength();
@@ -58,6 +60,7 @@ export default function GameBoard() {
 
     return {
         getBoard,
+        getShips,
         placeShip,
         receiveAttack,
         allShipsSunk,
