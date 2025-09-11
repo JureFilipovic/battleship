@@ -11,29 +11,47 @@ export default function GameBoard() {
     const placeShip = (row, column, ship, direction) => {
         const length = ship.getLength();
 
-        //Check for out of bounds
+        // Out-of-bounds check
         if (direction === "horizontal") {
             if (column + length > 10) return false;
         } else {
             if (row + length > 10) return false;
         }
-        
-        //Check for overlapping ships
+
+        // Helper: is a board cell (and its 8 neighbors) free?
+        const isAreaFree = (r, c) => {
+            for (let dr = -1; dr <= 1; dr++) {
+                for (let dc = -1; dc <= 1; dc++) {
+                    const nr = r + dr;
+                    const nc = c + dc;
+                    if (
+                        nr >= 0 && nr < 10 &&
+                        nc >= 0 && nc < 10 &&
+                        board[nr][nc] !== null
+                    ) {
+                        return false; // neighbor occupied
+                    }
+                }
+            }
+            return true;
+        };
+
+        // Check every intended cell **and its surrounding neighbors**
         for (let i = 0; i < length; i++) {
             const r = direction === "vertical" ? row + i : row;
             const c = direction === "horizontal" ? column + i : column;
-            if (board[r][c] !== null) return false;
+            if (!isAreaFree(r, c)) return false;
         }
-        
-        //Place the ship
+
+        // Place the ship
         for (let i = 0; i < length; i++) {
             const r = direction === "vertical" ? row + i : row;
             const c = direction === "horizontal" ? column + i : column;
             board[r][c] = { ship, hit: false };
         }
 
-        if(!ships.includes(ship)) ships.push(ship);
-        
+        if (!ships.includes(ship)) ships.push(ship);
+
         return true;
     }
 

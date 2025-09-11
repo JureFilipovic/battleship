@@ -1,0 +1,39 @@
+/* Layout for each board container */
+.board {
+  display: grid;
+  grid-template-columns: repeat(10, 30px);
+  grid-template-rows: repeat(10, 30px);
+  gap: 2px;
+  margin: 20px;
+  background: #0e1a2b;   /* dark navy background */
+  padding: 5px;
+  border: 2px solid #333;
+}
+
+/* Individual cell styling */
+.cell {
+  width: 30px;
+  height: 30px;
+  background: #1e3a5f;    /* blue-gray water */
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+/* Hover highlight for clicks */
+.cell:hover {
+  background: #2f5d8a;
+}
+
+/* Ships visible (for testing) */
+.cell.ship {
+  background: #666;       /* grey ship */
+}
+
+/* Attack results */
+.cell.hit {
+  background: crimson;
+}
+.cell.miss {
+  background: lightblue;
+}

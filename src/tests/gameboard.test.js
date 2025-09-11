@@ -130,10 +130,10 @@ describe("receiveAttack method", () => {
         const ship1 = Ship(2);
         const ship2 = Ship(3);
         board.placeShip(0, 0, ship1, "horizontal");
-        board.placeShip(1, 0, ship2, "horizontal");
+        board.placeShip(2, 0, ship2, "horizontal");
 
         board.receiveAttack(0, 0);
-        board.receiveAttack(1, 0);
+        board.receiveAttack(2, 0);
 
         expect(ship1.getHits()).toBe(1);
         expect(ship2.getHits()).toBe(1);
@@ -147,7 +147,7 @@ describe("allShipsSunk method", () => {
         const ship2 = Ship(3);
 
         board.placeShip(0, 0, ship1, "horizontal");
-        board.placeShip(1, 0, ship2, "horizontal");
+        board.placeShip(2, 0, ship2, "horizontal");
 
         expect(board.allShipsSunk()).toBe(false);
 
@@ -156,9 +156,9 @@ describe("allShipsSunk method", () => {
         expect(ship1.isSunk()).toBe(true);
         expect(board.allShipsSunk()).toBe(false);
         
-        board.receiveAttack(1, 0);
-        board.receiveAttack(1, 1);
-        board.receiveAttack(1, 2);
+        board.receiveAttack(2, 0);
+        board.receiveAttack(2, 1);
+        board.receiveAttack(2, 2);
         expect(ship2.isSunk()).toBe(true);
         expect(board.allShipsSunk()).toBe(true);
     });
