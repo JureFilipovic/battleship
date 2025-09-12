@@ -28,7 +28,7 @@ describe("Player can attack", () => {
         player.setEnemyBoard(enemyBoard);
         const result = player.attack(0, 0);
 
-        expect(result).toBe(true);
+        expect(result).toBe("miss");
         expect(player.getEnemyBoard().getBoard()[0][0]).toBe("Miss")
     });
 
@@ -40,7 +40,7 @@ describe("Player can attack", () => {
         player.setEnemyBoard(enemyBoard);
         const result = player.attack(0, 0);
         
-        expect(result).toBe(true);
+        expect(result).toBe("hit");
         expect(player.getEnemyBoard().getBoard()[0][0].hit).toBe(true);
         expect(ship.getHits()).toBe(1);
     });
@@ -52,7 +52,7 @@ describe("Player can attack", () => {
 
         player.attack(0, 0);
         const result = player.attack(0, 0);
-        expect(result).toBe(false);
+        expect(result).toBe("Already attacked");
     });
 });
 

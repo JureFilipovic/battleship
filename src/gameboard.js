@@ -59,18 +59,18 @@ export default function GameBoard() {
         //Empty cell, missed attack, return true
         if (!board[row][column]) {
             board[row][column] = "Miss";
-            return true;
+            return "miss";
         } else {
             //Tried attack on already attacked cell, return false
             if (board[row][column] === "Miss" || board[row][column].hit === true) {
-                return false;
+                return "Already attacked";
             }
 
             //Successful attack, return true
             const ship = board[row][column].ship;
             board[row][column].hit = true;
             ship.hit();
-            return true;
+            return "hit";
         }
     }
 

@@ -23,6 +23,7 @@ export default function domController() {
         const cells = document.querySelectorAll(`${selector} .cell`);
         cells.forEach(cell => {
             cell.addEventListener("click", () => {
+                if (cell.classList.contains("disabled")) return;
                 const row = parseInt(cell.dataset.row, 10);
                 const col = parseInt(cell.dataset.col, 10);
                 callback(row, col);
@@ -32,7 +33,7 @@ export default function domController() {
 
     const updateCell = (selector, row, col, result) => {
         const cell = document.querySelector(
-            `${selector} .cell[data-row]="${row}"][data-col]="${col}]`
+            `${selector} .cell[data-row="${row}"][data-col="${col}"]`
         );
         if (!cell) return;
 

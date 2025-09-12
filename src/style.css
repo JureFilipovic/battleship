@@ -30,6 +30,10 @@
   background: #666;       /* grey ship */
 }
 
+.cell.ship:hover {
+    background: lightgray;
+}
+
 /* Attack results */
 .cell.hit {
   background: crimson;
