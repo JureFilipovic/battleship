@@ -8,6 +8,7 @@ export default function Player(type = "user") {
 
     const getType = () => type;
     const getOwnBoard = () => board;
+    const getShips = () => ships;
 
     const setEnemyBoard = (board) => {
         enemyBoard = board;
@@ -44,9 +45,11 @@ export default function Player(type = "user") {
     return {
         getType,
         getOwnBoard,
+        getShips,
         setEnemyBoard,
         getEnemyBoard,
         attack,
         randomlyPlaceShips,
+        createShips,
     }
 }

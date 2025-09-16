@@ -41,3 +41,52 @@
 .cell.miss {
   background: lightblue;
 }
+
+/* shipyard container */
+#shipyard {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 12px 0;
+}
+
+/* draggable wrapper */
+.ship-piece {
+  display: inline-flex;
+  flex-direction: column;       
+  align-items: center;
+  cursor: grab;
+  /* border: 1px solid #444; */
+  padding: 4px;
+  user-select: none;
+  /* background: #0e1a2b; */
+}
+
+/* just the grey cells */
+.ship-body {
+  display: flex;                /* horizontal default */
+  /* gap: 2px;         */
+}
+
+.ship-piece.horizontal {
+  flex-direction: row;
+}
+
+.ship-body.vertical {
+  flex-direction: column;       /* vertical when rotated */
+}
+
+.ship-cell {
+  width: 30px;
+  height: 30px;
+  background: #666;
+  border: 1px solid #333;
+}
+
+.rotate-btn {
+  margin: 0 0 0 4px;
+}
+
+.ship-piece.vertical .rotate-btn {
+  margin: 4px 0 0 0;            /* when vertical: top spacing */
+}

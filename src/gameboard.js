@@ -36,7 +36,7 @@ export default function GameBoard() {
             return true;
         };
 
-        // Check every intended cell **and its surrounding neighbors**
+        // Check every intended cell and its surrounding neighbors
         for (let i = 0; i < length; i++) {
             const r = direction === "vertical" ? row + i : row;
             const c = direction === "horizontal" ? column + i : column;
