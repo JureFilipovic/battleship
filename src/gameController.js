@@ -67,8 +67,7 @@ export default function gameController() {
             if (!inBounds(r, c)) return;
 
             const cell = enemyBoard[r][c];
-            const notAttacked =
-                cell === null || (cell.ship && cell.hit === false);
+            const notAttacked = cell === null || (cell.ship && cell.hit === false);
 
             if (notAttacked &&
                 !candidateQueue.some(([qr, qc]) => qr === r && qc === c)) {
@@ -106,12 +105,19 @@ export default function gameController() {
 
     const playComputerTurn = () => {
         let row, col, result;
+        const enemyBoard = player2.getEnemyBoard().getBoard();
+
+        const isValidTarget = (r, c) => {
+            const cell = enemyBoard[r][c];
+            return cell === null || (cell.ship && !cell.hit);
+        }
 
         const handleHit = (row, col) => {
             const cell = player2.getEnemyBoard().getBoard()[row][col];
                 const ship = cell.ship;
 
                 if (ship.isSunk()) {
+                    player2.getEnemyBoard().markForbidden(computerHits);
                     computerHits.length = 0;
                     candidateQueue.length = 0;
                 } else {
@@ -124,13 +130,12 @@ export default function gameController() {
             do {
                 row = Math.floor(Math.random() * 10);
                 col = Math.floor(Math.random() * 10);
-                result = player2.attack(row, col);
+            } while (!isValidTarget(row, col));
 
-                if (result === "hit") handleHit(row, col);
+            result = player2.attack(row, col);
+            if (result === "hit") handleHit(row, col);
 
-            } while (result === "Already attacked");
         } else {
-            console.log(candidateQueue);
             [row, col] = candidateQueue.shift();
             result = player2.attack(row, col);
 

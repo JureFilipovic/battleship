@@ -76,12 +76,26 @@ export default function GameBoard() {
 
     const allShipsSunk = () => ships.every(ship => ship.isSunk());
 
+    const markForbidden = (hits) => {
+        hits.forEach(([r, c]) => {
+            for (let dr=-1; dr<=1; dr++) {
+                for (let dc=-1; dc<=1; dc++) {
+                    const nr = r+dr, nc = c+dc;
+                    if (nr>=0 && nr<10 && nc>=0 && nc<10 && board[nr][nc] === null) {
+                        board[nr][nc] = "forbidden";
+                    }
+                }
+            }
+        });
+    }
+
     return {
         getBoard,
         getShips,
         placeShip,
         receiveAttack,
         allShipsSunk,
+        markForbidden,
     }
 }
 
