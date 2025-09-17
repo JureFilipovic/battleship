@@ -8,7 +8,7 @@ module.exports = merge(common, {
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "main.js",
-    publicPath: "/image-carousel/",
+    publicPath: "/battleship/",
   },
   plugins: [
     new CleanWebpackPlugin(),
