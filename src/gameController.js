@@ -8,6 +8,13 @@ export default function gameController() {
     let currentPlayer = player1;
     let computerHits = [];
     let candidateQueue = [];
+    let computerBoardVisible = false;
+
+    const toggleComputerBoardVisible = () => {
+        computerBoardVisible = !computerBoardVisible;
+
+        dom.renderBoard(player2.getEnemyBoard().getBoard(), ".enemy-board", computerBoardVisible);
+    };
 
     const init = () => {
         player2.randomlyPlaceShips();
@@ -25,8 +32,9 @@ export default function gameController() {
     const startBattlePhase = () => {
         player1.setEnemyBoard(player2.getOwnBoard());
 
-        dom.renderBoard(player2.getOwnBoard().getBoard(), ".enemy-board", true);
+        dom.renderBoard(player2.getOwnBoard().getBoard(), ".enemy-board", computerBoardVisible);
         dom.bindCellClicks(".enemy-board", handlePlayerMove);
+        dom.bindToggleComputerBoard(toggleComputerBoardVisible); 
     };
 
     const placePlayerShip = (ship, row, col, direction) => {
@@ -156,6 +164,7 @@ export default function gameController() {
     return {
         init,
         placePlayerShip,
+        toggleComputerBoardVisible,
         board: player1.getOwnBoard()
     }
 }

@@ -1,40 +1,39 @@
-/* Layout for each board container */
+
 .board {
   display: grid;
+  width: max-content;
+  height: max-content;
   grid-template-columns: repeat(10, 30px);
   grid-template-rows: repeat(10, 30px);
   gap: 2px;
   margin: 20px;
-  background: #0e1a2b;   /* dark navy background */
+  background: #0e1a2b;
   padding: 5px;
   border: 2px solid #333;
+  border-radius: 2px;
 }
 
-/* Individual cell styling */
 .cell {
   width: 30px;
   height: 30px;
-  background: #1e3a5f;    /* blue-gray water */
+  background: #1e3a5f;
   border-radius: 2px;
   cursor: pointer;
   transition: background 0.2s;
 }
 
-/* Hover highlight for clicks */
 .cell:hover {
   background: #2f5d8a;
 }
 
-/* Ships visible (for testing) */
 .cell.ship {
-  background: #666;       /* grey ship */
+  background: #666; 
 }
 
 .cell.ship:hover {
     background: lightgray;
 }
 
-/* Attack results */
 .cell.hit {
   background: crimson;
 }
@@ -42,7 +41,6 @@
   background: lightblue;
 }
 
-/* shipyard container */
 #shipyard {
   display: flex;
   flex-wrap: wrap;
@@ -50,22 +48,21 @@
   margin: 12px 0;
 }
 
-/* draggable wrapper */
 .ship-piece {
   display: inline-flex;
   flex-direction: column;       
   align-items: center;
   cursor: grab;
-  /* border: 1px solid #444; */
   padding: 4px;
   user-select: none;
-  /* background: #0e1a2b; */
 }
 
-/* just the grey cells */
+.ship-piece.dragging .rotate-btn {
+  display: none;
+}
+
 .ship-body {
-  display: flex;                /* horizontal default */
-  /* gap: 2px;         */
+  display: flex;
 }
 
 .ship-piece.horizontal {
@@ -73,7 +70,7 @@
 }
 
 .ship-body.vertical {
-  flex-direction: column;       /* vertical when rotated */
+  flex-direction: column;
 }
 
 .ship-cell {

@@ -32,7 +32,7 @@ export default function domController() {
         ships.forEach(ship => {
             const wrapper = document.createElement("div");
             wrapper.className = "ship-piece horizontal";
-            // wrapper.draggable = true;
+            wrapper.draggable = true;
             wrapper.shipObj = ship;
             wrapper.dataset.orientation = "horizontal";
 
@@ -42,7 +42,7 @@ export default function domController() {
             for (let i = 0; i < ship.getLength(); i++) {
                 const cell = document.createElement("div");
                 cell.className = "ship-cell";
-                body.draggable = true;
+                // body.draggable = true;
                 body.appendChild(cell);
             }
             wrapper.appendChild(body);
@@ -70,11 +70,17 @@ export default function domController() {
 
         shipyard.addEventListener("dragstart", e => {
             const piece = e.target.closest(".ship-piece");
-            if (piece) draggedShip = piece;
+            if (piece) {
+                draggedShip = piece;
+                piece.classList.add("dragging");
+            }
         });
 
         shipyard.addEventListener("dragend", () => {
-            draggedShip = null;
+            if (draggedShip) {
+                draggedShip.classList.remove("dragging");
+                draggedShip = null;
+            }
         });
 
         const board = document.querySelector(".player-board");
@@ -129,11 +135,17 @@ export default function domController() {
         if (result === "miss") cell.classList.add("miss");
     };
 
+    const bindToggleComputerBoard = (onToggle) => {
+        const btn = document.getElementById("show-hide-btn");
+        btn.addEventListener("click", onToggle);
+    };
+
     return {
         renderBoard,
         renderShipyard,
         bindCellClicks,
         updateCell,
+        bindToggleComputerBoard,
         endGame: msg => alert(msg),
         set onAllShipsPlaced(cb) { onAllShipsPlaced = cb; },
     };
