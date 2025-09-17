@@ -42,7 +42,6 @@ export default function domController() {
             for (let i = 0; i < ship.getLength(); i++) {
                 const cell = document.createElement("div");
                 cell.className = "ship-cell";
-                // body.draggable = true;
                 body.appendChild(cell);
             }
             wrapper.appendChild(body);
