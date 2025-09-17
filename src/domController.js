@@ -13,8 +13,15 @@ export default function domController() {
                 cell.classList.add("cell");
                 cell.dataset.row = row;
                 cell.dataset.col = col;
+                const cellData = board[row][col];
 
-                if (showShips && board[row][col]?.ship) {
+                if (cellData === "Miss") {
+                    cell.classList.add("miss");
+                } else if (cellData && cellData.hit === true) {
+                    cell.classList.add("hit");
+                }
+
+                if (showShips && cellData?.ship) {
                     cell.classList.add("ship");
                 }
 

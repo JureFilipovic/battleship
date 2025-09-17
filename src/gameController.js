@@ -12,8 +12,12 @@ export default function gameController() {
 
     const toggleComputerBoardVisible = () => {
         computerBoardVisible = !computerBoardVisible;
-
-        dom.renderBoard(player2.getEnemyBoard().getBoard(), ".enemy-board", computerBoardVisible);
+        dom.renderBoard(
+            player2.getOwnBoard().getBoard(), 
+            ".enemy-board", 
+            computerBoardVisible
+        );
+        dom.bindCellClicks(".enemy-board", handlePlayerMove);
     };
 
     const init = () => {
